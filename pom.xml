@@ -23,6 +23,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.swagger.codegen.v3</groupId>
+            <artifactId>swagger-codegen-maven-plugin</artifactId>
+            <version>3.0.8</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -42,6 +47,35 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>io.swagger.codegen.v3</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>3.0.8</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/static/food.yaml</inputSpec>
+                            <language>spring</language>
+                            <output>${project.build.directory}/generated-sources/openapi</output>
+                            <modelPackage>com.manchester.hossein.food.models</modelPackage>
+                            <apiPackage>com.manchester.hossein.food.api</apiPackage>
+                            <configOptions>
+                                <groupId>com.manchester.hossein</groupId>
+                                <artifactId>food-api-generated</artifactId>
+                                <interfaceOnly>true</interfaceOnly>
+                                <java8>true</java8>
+                                <dateLibrary>java8</dateLibrary>
+                                <delegatePattern>true</delegatePattern>
+                                <useBeanValidation>true</useBeanValidation>
+                            </configOptions>
+                            <generateApiTests>false</generateApiTests>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
